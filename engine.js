@@ -6,167 +6,90 @@
 // https://www.youtube.com/@pro_pakistani
 // Crackit!
 /////////////////////////////////////////////////////////////////////////////////////////
-//Creating main div tag for making resize perfect
-main = document.createElement("div");
-main.setAttribute('id', 'root');
-document.body.appendChild(main);
-document.getElementById('root').innerHTML= "<style>body{background-color: skyblue;} #root{width: 100%; height: auto; } </style>";
+//Creating ads container 1
+CAI = document.createElement("div");
+CAI.setAttribute('id', 'centerAdsCont');
+document.body.appendChild(CAI);
 
-//creating slide 
-// main slide div
-slide = document.createElement("div");
-slide.setAttribute('id', 'slidercontainer');
-slide.setAttribute('class', 'slidercontainer');
-document.getElementById('root').appendChild(slide);
+//Creating style for center 
+document.getElementById('centerAdsCont').innerHTML = "<style>#centerAdsCont {       display: none;        width: 100%;        height: 100vh;        position: fixed;        top: 0px;        right: 0px;        background-color: rgb(0, 0, 0, 0.7)    }        #centerAds {        width: auto;        height: auto;        background-color: white;        border: 3px solid white;        position: absolute;        top: 50%;        left: 50%;        transform: translate(-50%, -50%);    }        #CloseCenterAds {        position: relative;        width: auto%;        height: auto;        background-color: rgba(151, 155, 151, 0)    }        #closeCAds {        position absolute;        top: 0px;        right: 1px;        font-family: sans-serif;        border: 1px solid black;        background-color: black;        font-size: x-large;        color: white;        cursor: pointer;    width: 100%;   }        #closeCAds:hover {        color: red;    }</style>";
 
-// each single slide 1
-slide_s = document.createElement("div");
-slide_s.setAttribute('id', 'showSlide');
-slide_s.setAttribute('class', 'showSlide fade');
-document.getElementById('slidercontainer').appendChild(slide_s);
+//Center ads container 2
+CAII = document.createElement("div");
+CAII.setAttribute('id', 'centerAds');
+CAII.setAttribute('class', 'centerAdsC');
+document.getElementById("centerAdsCont").appendChild(CAII);
 
-//slide image 
-slide_s = document.createElement("img");
-slide_s.setAttribute('src', 'images/banner1.png');
-document.getElementById('showSlide').appendChild(slide_s);
+//Center ads container 3
+CAIII = document.createElement("div");
+CAIII.setAttribute('id', 'CloseCenterAds');
+document.getElementById("centerAds").appendChild(CAIII);
 
-//heading of slide 
-//slide_s = document.createElement("div");
-//slide_s.setAttribute('id', 'content');
-//slide_s.setAttribute('class', 'content');
-//document.getElementById('showSlide').appendChild(slide_s);
+//Creating close button
+CAB = document.createElement("input");
+CAB.setAttribute('type', 'button');
+CAB.setAttribute('id', 'closeCAds');
+CAB.setAttribute('onclick', 'closeCAds()');
+CAB.setAttribute('value', 'close');
+document.getElementById("CloseCenterAds").appendChild(CAB);
 
+//Center Ads script
+setTimeout(function() {
+    document.getElementById('centerAdsCont').style.display = "block";
+}, 5000);
 
+function closeCAds() {
+    document.getElementById('centerAdsCont').style.display = "none";
 
-// each single slide 2
-slide_s = document.createElement("div");
-slide_s.setAttribute('id', 'showSlidei');
-slide_s.setAttribute('class', 'showSlide fade');
-document.getElementById('slidercontainer').appendChild(slide_s);
+}
+////////////////////////////////////////////////////////
+//Ads container
+kaiad = document.createElement("div");
+kaiad.setAttribute('id', 'kaiI');
+document.getElementById("centerAds").appendChild(kaiad);
 
-//slide image 
-slide_s = document.createElement("img");
-slide_s.setAttribute('src', 'images/banner2.png');
-document.getElementById('showSlidei').appendChild(slide_s);
+//Include Script
+Cmain = document.createElement("script");
+Cmain.setAttribute('src', 'https://static.kaiads.com/ads-sdk/ads-sdk.v5.min.js');
+document.getElementById("centerAds").appendChild(Cmain);
 
-//next button
-slide_s = document.createElement("a");
-slide_s.setAttribute('class', 'left');
-slide_s.setAttribute('id', 'left');
-slide_s.setAttribute('onclick', 'nextSlide(-1)');
-document.getElementById('slidercontainer').appendChild(slide_s);
-document.getElementById('left').innerHTML= "Left";
-
-//previous button 
-slide_s = document.createElement("a");
-slide_s.setAttribute('class', 'right');
-slide_s.setAttribute('id', 'right');
-slide_s.setAttribute('onclick', 'nextSlide(1)');
-document.getElementById('slidercontainer').appendChild(slide_s);
-document.getElementById('right').innerHTML= "right";
-
-
-
-//previous button 
-slide_s = document.createElement("div");
-slide_s.setAttribute('id', 'header');
-document.getElementById('root').appendChild(slide_s);
-document.getElementById('header').innerHTML= "<h2 <i>Crack it!</i> <sub>by It Hackers</sub></h2>";
+//Ads Script
+getKaiAd({
+    publisher: '9c6cc6a7-68c0-4f9d-a31c-36ca94bae25a',
+    app: 'ithackers',
+    slot: 'ithackers_slot',
+    h: 264,
+    w: 240,
+    container: document.getElementById('kaiI'),
+    onerror: err => console.error('Custom catch:', err),
+    onready: ad => {
+        ad.call('display', {
+            tabindex: 0,
+            navClass: 'items',
+            display: 'block',
+        })
+    }
+})
 
 
-//logo
-slide_s = document.createElement("img");
-slide_s.setAttribute('id', 'logo');
-slide_s.setAttribute('src', 'images/ico.ico');
-document.getElementById('header').appendChild(slide_s);
+//Extra styling for unlocking widgets
+document.getElementById('header').style.dispaly = "block";
+document.getElementById('main').style.display = "block";
 
-//search button
-slide_s = document.createElement("button");
-slide_s.setAttribute('id', 'myBtn');
-document.getElementById('header').appendChild(slide_s);
-
-//src image
-src_img = document.createElement("img");
-src_img.setAttribute('src', 'images/search.png');
-document.getElementById('myBtn').appendChild(src_img);
-
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
+//Unblocking if user blocks the ads by css
+document.getElementById('centerAdsCont').style.display = "block";
+document.getElementById('centerAds').style.display = "block";
+document.getElementById('kaiI').style.display = "block";
 
 
-
-
-
-//adobe photoshop
-adobe = document.createElement("div");
-adobe.setAttribute('class', 'app');
-adobe.setAttribute('id', 'adobe');
-document.getElementById('root').appendChild(adobe);
-
-// image
-adobe = document.createElement("img");
-adobe.setAttribute('src', 'images/adobephotoshop.jpg');
-adobe.setAttribute('class', 'productimage');
-document.getElementById('adobe').appendChild(adobe);
-
-// adobe title
-adobe = document.createElement("div");
-adobe.setAttribute('id', 'adobe_title');
-document.getElementById('adobe').appendChild(adobe);
-document.getElementById('adobe_title').innerHTML= "<strong>Adobe Photoshop 7.0</strong><br/><i>Photo editor.</i><br/><br/>";
-
-// download button adobe photoshop
-adobe = document.createElement("button");
-adobe.setAttribute('id', 'adobe_download');
-adobe.setAttribute('class', 'downloadbutton');
-adobe.setAttribute('onclick', 'adobe_photoshop()');
-document.getElementById('adobe').appendChild(adobe);
-document.getElementById('adobe_download').innerHTML= "Download";
-
-
-
-
-
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-adobe = document.createElement("br");
-document.getElementById('root').appendChild(adobe);
-
-
-
-
-  var slide_index = 1;  
-        displaySlides(slide_index);  
-  
-        function nextSlide(n) {  
-            displaySlides(slide_index += n);  
-        }  
-  
-        function currentSlide(n) {  
-            displaySlides(slide_index = n);  
-        }  
-  
-        function displaySlides(n) {  
-            var i;  
-            var slides = document.getElementsByClassName("showSlide");  
-            if (n > slides.length) { slide_index = 1 }  
-            if (n < 1) { slide_index = slides.length }  
-            for (i = 0; i < slides.length; i++) {  
-                slides[i].style.display = "none";  
-            }  
-            slides[slide_index - 1].style.display = "block";  
-        }
-
-
-
+/*
+//checking if location is in pakistan
+    if (window.location.href.indexOf("pakistan") !== -1 || window.location.href.indexOf("pk") !== -1) {
+        alert("Pakistan");
+    } else {
+        alert("Not Pakistan");
+    }
+*/
 
 
 
